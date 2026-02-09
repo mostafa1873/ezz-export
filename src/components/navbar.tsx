@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
 import { FaFacebookF, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import Image from 'next/image';
+import { Home, Info, Leaf, PhoneCall } from "lucide-react";
 
 import logoMain from '../assets/greenrow.webp';
 import GB from '../assets/GB.webp';
@@ -39,14 +40,13 @@ export default function Navbar() {
     }, []);
 
     const navLinkStyles = (path: string) => {
-        // إذا كان المسار هو الهوم، نستخدم المطابقة التامة
-        // أما المسارات الأخرى، نتأكد أنها تبدأ بنفس المسار (أو مطابقة تماماً)
+
         const isActive = path === '/'
             ? pathname === '/'
             : pathname.startsWith(path);
 
         return `relative px-6 py-2 rounded-full font-bold text-sm transition-all duration-500 
-        ${isActive ? 'text-white bg-green-700 shadow-lg' : 'text-gray-500 hover:text-green-700 hover:bg-gray-100/60'}`;
+        ${isActive ? 'text-white bg-[#2d5a27] shadow-lg' : 'text-gray-500 hover:text-green-700 hover:bg-gray-100/60'}`;
     };
 
 
@@ -56,9 +56,10 @@ export default function Navbar() {
 
     return (
         <>
+             {/* Main Nav */}
             <div className={`fixed w-full z-[100] transition-all duration-500 ${isScrolled ? 'top-4' : 'top-3'}`}>
                 <nav className={`mx-auto transition-all duration-500 ease-in-out
-    max-w-[95%] rounded-[3rem] ${isScrolled ? 'shadow-2xl bg-white/90 backdrop-blur-xl border border-white/40' : 'shadow-xl bg-white/90 backdrop-blur-md border border-white/40'}`}>
+    max-w-[95%] rounded-[3rem] ${isScrolled ? 'shadow-2xl bg-white/90 backdrop-blur-xl border border-white/40' : 'shadow-md bg-white/90 backdrop-blur-md border border-white/40'}`}>
 
                     <div className="w-full px-6 lg:px-12 h-24 flex justify-between items-center">
 
@@ -81,7 +82,7 @@ export default function Navbar() {
                             <div className="relative hidden lg:block">
                                 <button
                                     onClick={() => setLangMenuOpen(!langMenuOpen)}
-                                    className="flex items-center gap-2 bg-gray-900 text-white px-5 py-2.5 rounded-full hover:bg-agri-green transition-all cursor-pointer shadow-sm"
+                                    className="flex items-center gap-2 bg-[#315028] text-white px-5 py-2.5 rounded-full hover:bg-agri-green transition-all cursor-pointer shadow-sm"
                                 >
                                     <Image src={currentLang.flag} width={20} height={14} className="object-cover rounded-sm" alt="" />
                                     <span className="font-bold text-[11px] uppercase">{currentLang.code}</span>
@@ -131,21 +132,35 @@ export default function Navbar() {
 
                     <div className="space-y-2 flex-grow">
                         {[
-                            { name: 'Home', path: '/', id: '01' },
-                            { name: 'About', path: '/about', id: '02' },
-                            { name: 'Products', path: '/products', id: '03' },
-                            { name: 'Contact', path: '/contact', id: '04' }
+                            { name: 'Home', path: '/', icon: <Home className="w-5 h-5" /> },
+                            { name: 'About', path: '/about', icon: <Info className="w-5 h-5" /> },
+                            { name: 'Products', path: '/products', icon: <Leaf className="w-5 h-5" /> },
+                            { name: 'Contact', path: '/contact', icon: <PhoneCall className="w-5 h-5" /> }
                         ].map((link) => {
                             const isActive = pathname === link.path;
                             return (
-                                <Link key={link.path} href={link.path} onClick={() => setMobileMenuOpen(false)} className="group block w-full">
-                                    <div className={`flex items-center gap-4 h-12 transition-all duration-300 flex-row rounded-xl
-                                        ${isActive ? 'bg-green-700 text-white shadow-lg' : 'hover:bg-gray-100/60 hover:text-agri-green'} p-2`}
+                                <Link
+                                    key={link.path}
+                                    href={link.path}
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    className="group block w-full"
+                                >
+                                    <div className={`flex items-center gap-4 h-14 transition-all duration-300 flex-row rounded-xl px-4
+                                          ${isActive
+                                            ? 'bg-[#2d5a27] text-white shadow-lg shadow-green-900/20'
+                                            : 'text-gray-600 hover:bg-gray-100/80 hover:text-[#2d5a27]'}`}
                                     >
-                                        <span className="text-2xl font-black uppercase tracking-tighter">
+                                        <div className={`transition-transform duration-300 group-hover:scale-110 ${isActive ? 'text-white' : 'text-gray-400 group-hover:text-[#2d5a27]'}`}>
+                                            {link.icon}
+                                        </div>
+
+                                        <span className="text-xl font-bold uppercase tracking-tight">
                                             {link.name}
                                         </span>
 
+                                        <div className={`ml-auto transition-all duration-300 ${isActive ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0'}`}>
+                                            <div className="w-1.5 h-1.5 rounded-full bg-current" />
+                                        </div>
                                     </div>
                                 </Link>
                             );

@@ -46,7 +46,6 @@ const ProductCategories = () => {
         <section className="py-16 md:py-24 bg-white relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-6">
 
-                {/* Header - متظبط للموبايل */}
                 <div className="mb-12 md:mb-24 relative flex flex-col items-center text-center">
                     <motion.h2
                         initial={{ opacity: 0, scale: 0.8 }}
@@ -59,13 +58,13 @@ const ProductCategories = () => {
                     <div className="relative z-10 space-y-3 md:space-y-4">
                         <div className="flex items-center justify-center gap-3 md:gap-4">
                             <div className="w-6 md:w-8 h-[1px] bg-green-200" />
-                            <span className="text-green-600 font-black uppercase tracking-[0.3em] md:tracking-[0.5em] text-[8px] md:text-[10px]">
+                            <span className="text-[#2d5a27] font-black uppercase tracking-[0.3em] md:tracking-[0.5em] text-[8px] md:text-[10px]">
                                 Our Expertise
                             </span>
                             <div className="w-6 md:w-8 h-[1px] bg-green-200" />
                         </div>
                         <h2 className="text-3xl sm:text-5xl md:text-7xl font-black text-gray-900 tracking-tighter">
-                            The <span className="italic text-green-600">Three</span> Pillars
+                            The <span className="italic text-[#2d5a27]">Three</span> Pillars
                         </h2>
                     </div>
                 </div>
@@ -110,7 +109,6 @@ const ProductCategories = () => {
                                         {cat.title}
                                     </h3>
                                     
-                                    {/* الوصف بيظهر دايماً في الموبايل وبشكل انسيابي في الديسكتوب */}
                                     <div className="md:h-0 md:overflow-hidden transition-all duration-500 md:group-hover:h-20">
                                         <p className="text-white/80 text-xs md:text-sm leading-relaxed mb-4 md:mb-6 line-clamp-2 md:line-clamp-none">
                                             {cat.description}
