@@ -36,7 +36,7 @@ export default function CinematicHero() {
                                 <span className="text-[#2d5a27] relative">
                                     SOURCE
                                 </span> <br />
-                                <span className="font-serif italic font-light">DIRECTLY.</span>
+                                <span className="">DIRECTLY.</span>
                             </h1>
 
                             {/* Mobile Image */}

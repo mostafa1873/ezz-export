@@ -4,13 +4,14 @@ import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { Sparkles } from "lucide-react";
 import Link from "next/link";
+import imgMain from '../../assets/mainImg.png'
 
 const AboutFluid = () => {
   const shouldReduceMotion = useReducedMotion();
 
   return (
     <section className="py-12 bg-[#fefefe] relative overflow-hidden">
-      
+
       <div className="max-w-7xl mx-auto px-6 relative">
 
         <motion.div
@@ -52,14 +53,14 @@ const AboutFluid = () => {
               >
                 <Sparkles className="w-4 h-4 text-[#2d5a27]" />
                 <span className="text-[#2d5a27] font-bold uppercase tracking-[0.6em] text-[10px]">
-                  The Essence of Quality
+                  Purely From The Source
                 </span>
               </motion.div>
 
               <h3 className="text-4xl md:text-7xl font-black text-gray-900 leading-[1.1] tracking-tight">
-                Not Just a Company, <br />
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#2d5a27] to-[#2d5a27] italic">
-                  A Green Legacy.
+                From the Nile’s Heart to <br />
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#2d5a27] to-[#2d5a27]">
+                  the World’s Hands.
                 </span>
               </h3>
             </div>
@@ -83,7 +84,7 @@ const AboutFluid = () => {
                               transition-all duration-1000
                               md:group-hover:rounded-[40%_40%_40%_40%] relative">
                 <Image
-                  src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=2070&auto=format&fit=crop"
+                  src={imgMain}
                   alt="Egyptian Soil"
                   fill
                   className="object-cover scale-[1.05] md:scale-110
@@ -120,8 +121,8 @@ const AboutFluid = () => {
                     Origin Story
                   </h4>
                   <p className="text-gray-500 text-lg md:text-xl leading-relaxed font-medium">
-                    We are the <span className="text-gray-900 font-bold italic">pulse</span> of the Egyptian fields.{" "}
-                    <span className="text-[#2d5a27]">Ezz Export</span> was born to bridge ancient soil wisdom with global demand.
+                    Ezz Export <span className="text-gray-900 font-bold italic">sends the best</span> crops from our farms to the world.
+                    <span className="text-[#2d5a27]">No secrets,</span> just honest farming and high quality.
                   </p>
                 </motion.div>
 
@@ -134,15 +135,11 @@ const AboutFluid = () => {
                 >
                   <div className="absolute -right-6 top-0 w-1 h-full bg-green-50 rounded-full" />
                   <h4 className="text-xs font-black text-gray-400 mb-3 tracking-[0.3em] uppercase">
-                    Philosophy
+                    Our Word
                   </h4>
                   <p className="text-gray-500 text-lg md:text-xl leading-relaxed font-medium">
-                    Transparency is our soil. Quality is our harvest. Every shipment is a{" "}
-                    <span className="relative inline-block">
-                      <span className="relative z-10 text-gray-900 font-bold">testament</span>
-                      <span className="absolute bottom-1 left-0 w-full h-2 bg-lime-200 -z-10 -rotate-1"></span>
-                    </span>{" "}
-                    to our commitment.
+                    Honesty is our base. Quality is our result. Every shipment <span className="relative inline-block"> <span className="relative z-10 text-gray-900 font-bold"> proves </span>
+                    </span> our word and our high standards.
                   </p>
                 </motion.div>
               </div>

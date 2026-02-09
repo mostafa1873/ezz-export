@@ -64,7 +64,7 @@ const ProductCategories = () => {
                             <div className="w-6 md:w-8 h-[1px] bg-green-200" />
                         </div>
                         <h2 className="text-3xl sm:text-5xl md:text-7xl font-black text-gray-900 tracking-tighter">
-                            The <span className="italic text-[#2d5a27]">Three</span> Pillars
+                            The <span className="text-[#2d5a27]">Three</span> Pillars
                         </h2>
                     </div>
                 </div>

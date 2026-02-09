@@ -4,11 +4,12 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ArrowRight, Weight, Calendar, Box, Sparkles } from "lucide-react";
+import Link from "next/link";
 
 const products = [
     {
         id: "01",
-        name: "Oranges",
+        name: "Navel Oranges",
         category: "Citrus",
         description: "Our premium Navel oranges are famous for their sweet taste, deep orange color, and seedless nature.",
         specs: { size: "48 / 56 / 64 / 72 / 80", season: "Dec - May", packing: "15 KG Cartons" },
@@ -67,22 +68,33 @@ const Seson = () => {
                             <button
                                 key={item.id}
                                 onClick={() => setActive(item)}
-                                className={`group w-full flex items-center justify-between p-5 md:p-7 rounded-[1.5rem] md:rounded-[2rem] transition-all duration-500 relative overflow-hidden ${active.id === item.id
-                                    ? "text-white shadow-2xl shadow-green-900/20 border lg:translate-x-4"
-                                    : "bg-white text-gray-400 hover:bg-gray-50 border border-gray-100"
+                                className={`group w-full flex items-center justify-between p-5 md:p-7 rounded-[1.5rem] md:rounded-[2rem] transition-all duration-500 relative overflow-hidden shadow-sm border ${active.id === item.id
+                                    ? "text-white shadow-2xl shadow-green-900/20 border-transparent lg:translate-x-4 bg-[#2d5a27]" // ضفنا اللون هنا مباشرة كـ fallback
+                                    : "bg-white text-gray-400 hover:bg-gray-50 border-gray-100"
                                     }`}
                             >
+                                {/* الـ Motion Div بيفضل موجود عشان الـ Animation الناعم بين الزراير */}
                                 {active.id === item.id && (
-                                    <motion.div layoutId="activeBg" className="absolute inset-0 bg-[#2d5a27] -z-10" />
+                                    <motion.div
+                                        layoutId="activeBg"
+                                        className="absolute inset-0 bg-[#2d5a27] z-0" // شيلنا الـ -10 وخليناها 0
+                                        initial={false}
+                                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                    />
                                 )}
-                            
-                                <div className="flex items-center gap-4">
-                                    <span className={`text-[10px] font-black px-2 py-1 rounded-md border ${active.id === item.id ? "border-white/50 bg-[#2d5a27] text-white" : "border-gray-100 bg-gray-50 text-gray-400"}`}>
+
+                                <div className="relative z-10 flex items-center gap-4"> {/* ضفنا z-10 هنا عشان الكلام يظهر فوق اللون */}
+                                    <span className={`text-[10px] font-black px-2 py-1 rounded-md border transition-colors ${active.id === item.id
+                                        ? "border-white/30 bg-white/10 text-white"
+                                        : "border-gray-100 bg-gray-50 text-gray-400"
+                                        }`}>
                                         {item.id}
                                     </span>
                                     <span className="text-base md:text-xl font-bold tracking-tight">{item.name}</span>
                                 </div>
-                                <div className={`transition-all duration-500 ${active.id === item.id ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"}`}>
+
+                                <div className={`relative z-10 transition-all duration-500 ${active.id === item.id ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"
+                                    }`}>
                                     <ArrowRight size={20} />
                                 </div>
                             </button>
@@ -109,7 +121,7 @@ const Seson = () => {
                                         className="object-cover transition-transform duration-700 hover:scale-105"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                                   
+
                                     <div className="absolute top-4 left-4">
                                         <span className="px-4 py-1.5 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-white text-[10px] font-bold uppercase tracking-widest">
                                             {active.category}
@@ -153,6 +165,35 @@ const Seson = () => {
                     </div>
 
                 </div>
+
+
+                <div className="flex justify-center mt-8 md:mt-12 px-4">
+                    <Link href="/products" className="w-full sm:w-auto">
+                        <motion.button
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="group relative w-full sm:w-auto flex items-center justify-between sm:justify-start gap-4 md:gap-8 bg-[#0a1a10] px-6 py-4 md:px-10 md:py-6 rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-2xl transition-all border border-white/5"
+                        >
+                            {/* تأثير الضوء المتحرك */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+
+                            <div className="flex flex-col items-start text-left relative z-10">
+                                <span className="text-[8px] md:text-[10px] font-black text-[#4ade80] uppercase tracking-[0.3em] md:tracking-[0.4em] mb-0.5 md:mb-1">
+                                    Discover More
+                                </span>
+                                <span className="text-white text-lg md:text-2xl font-black uppercase italic tracking-tighter leading-none">
+                                    View All Products
+                                </span>
+                            </div>
+
+                            {/* أيقونة السهم - مقاسها بيصغر في الموبايل */}
+                            <div className="relative z-10 w-10 h-10 md:w-14 md:h-14 bg-[#2d5a27] rounded-xl md:rounded-2xl flex items-center justify-center text-white group-hover:rotate-[-45deg] transition-transform duration-500 shadow-lg">
+                                <ArrowRight className="w-5 h-5 md:w-7 md:h-7" strokeWidth={3} />
+                            </div>
+                        </motion.button>
+                    </Link>
+                </div>
+
             </div>
         </section>
 

@@ -17,23 +17,30 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Ezz Export",
   description: "EZZ Export",
-  icons : '/icon.webp'
+  icons: {
+    icon: [
+      {
+        url: "/icon.webp",
+        href: "/icon.webp",
+      },
+    ],
+  },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Navbar />
-        {children}
-        <Footer />
-      </body>
-    </html>
-  );
+  export default function RootLayout({
+    children,
+  }: Readonly<{
+    children: React.ReactNode;
+  }>) {
+    return (
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <Navbar />
+          {children}
+          <Footer />
+        </body>
+      </html>
+    );
 }
