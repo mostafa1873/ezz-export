@@ -4,31 +4,35 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { FiArrowUpRight, FiStar } from "react-icons/fi";
-// تأكد من صحة المسارات عندك
 import arch from "../../assets/Ezzzzzzzzzzzzz-removebg-preview.png";
 import about from "../../assets/about-main.webp";
 import Link from "next/link";
 import Seson from "./seson";
 import ExportCTA from "./ExportCTA";
+import pro1 from "../../assets/pro1.png";
+import pro2 from "../../assets/pro2.png";
+import pro3 from "../../assets/pro3.png";
+
+
 
 const steps = [
   {
     // صورة مزارع ماسك الخضار بإيده - بتبين الاهتمام اليدوي (Handpicking)
-    img: "https://images.unsplash.com/photo-1595855759920-86582396756a?q=80&w=1280&auto=format&fit=crop",
+    img: pro1,
     step: "01",
     title: "SELECTIVE",
     desc: "We handpick every single crop. If it's not perfect, it doesn't leave the farm.",
   },
   {
     // صورة معملية أو فحص جودة دقيق جداً بستايل مودرن
-    img: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?q=80&w=1280&auto=format&fit=crop",
+    img: pro2,
     step: "02",
     title: "CERTIFIED",
     desc: "Our products pass the world's toughest safety tests. Zero chemicals, 100% natural.",
   },
   {
     // صورة كونتينرات شحن عملاقة أو لوجستيات بستايل "Dark & Professional"
-    img: "https://images.unsplash.com/photo-1494412519320-aa613dfb7738?q=80&w=1280&auto=format&fit=crop",
+    img: pro3,
     step: "03",
     title: "LOGISTICS",
     desc: "Cold-chain control from Egypt to your warehouse. Freshness is guaranteed.",
@@ -204,81 +208,94 @@ export default function AboutUsSection() {
         `}</style>
       </div>
 
-      {/* 4. Process Section - Clean & Fresh Light Design */}
-      <section className="bg-white py-12 relative overflow-hidden">
+      {/* 4. Process Section - Re-imagined Sleek Design */}
+      <section className="bg-[#F8F9FA] py-24 relative overflow-hidden">
         
-        {/* خلفية بنقشة خفيفة جداً لمنع الملل البصري */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+        {/* Decorative Background Elements */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#2d5a27]/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay pointer-events-none"></div>
 
-        <div className="container mx-auto px-6 lg:px-20 relative z-10">
+        <div className="container mx-auto px-6 lg:px-16 relative z-10">
           
-          {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
-            <div className="max-w-2xl">
+          {/* Header - More Minimal */}
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-20 gap-8">
+            <div className="max-w-3xl">
               <motion.div 
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                className="flex items-center gap-3 mb-4"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-3 mb-6"
               >
-                <span className="w-12 h-[2px] bg-[#2d5a27]" />
-                <span className="text-[#2d5a27] font-bold uppercase tracking-widest text-xs">Our Journey</span>
+                <span className="w-8 h-[2px] bg-[#2d5a27]" />
+                <span className="text-[#2d5a27] font-bold uppercase tracking-[0.2em] text-xs">Our Process</span>
               </motion.div>
-              <h2 className="text-6xl md:text-7xl font-black uppercase tracking-tighter text-slate-900 leading-[0.8] mb-4">
-                Seed to <br /> <span className="italic text-[#2d5a27]">Shelve.</span>
+              
+              <h2 className="text-5xl md:text-7xl font-black text-[#051109] leading-[0.9] tracking-tight">
+                From Soil to <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2d5a27] to-[#5cb85c]">
+                  Success.
+                </span>
               </h2>
             </div>
-            <p className="max-w-xs text-slate-500 font-medium leading-relaxed border-l-2 border-slate-100 pl-6">
-              Ensuring the highest Egyptian standards at every stage of the supply chain.
+            
+            <p className="max-w-md text-gray-500 text-lg leading-relaxed font-medium">
+              We control every step of the journey to ensure that the freshness of the Nile Delta reaches your destination intact.
             </p>
           </div>
 
-          {/* Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          {/* Grid - The "Raik" Part */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {steps.map((item, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
+                transition={{ duration: 0.7, delay: i * 0.15 }}
                 viewport={{ once: true }}
-                className="group relative"
+                className="group relative h-[550px] w-full rounded-[2.5rem] overflow-hidden cursor-pointer"
               >
-                {/* Image Container */}
-                <div className="relative h-[450px] w-full rounded-[2rem] overflow-hidden mb-8 shadow-[0_20px_50px_rgba(0,0,0,0.05)] transition-all duration-500 group-hover:shadow-[0_30px_60px_rgba(45,90,39,0.15)]">
-                  <img
+                {/* 1. Background Image with Zoom Effect */}
+                <div className="absolute inset-0 w-full h-full">
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500 z-10" />
+                  <Image
                     src={item.img}
                     alt={item.title}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110"
                   />
-                  
-                  {/* Overlay خفيف بيظهر عند الهوفر بس */}
-                  <div className="absolute inset-0 bg-[#2d5a27]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
-                  {/* Step Number Badge */}
-                  <div className="absolute top-6 left-6 w-14 h-14 bg-white/90 backdrop-blur-md rounded-2xl flex items-center justify-center shadow-sm border border-white/50">
-                    <span className="text-xl font-black text-[#2d5a27]">{item.step}</span>
+                </div>
+
+                {/* 2. Big Background Number (Watermark) */}
+                <div className="absolute top-4 right-6 z-10">
+                   <span className="text-[8rem] font-black text-white/10 leading-none select-none transition-transform duration-700 group-hover:-translate-y-2 group-hover:text-white/20">
+                     {item.step}
+                   </span>
+                </div>
+
+                {/* 3. Floating Glass Card Content */}
+                <div className="absolute bottom-6 left-6 right-6 z-20">
+                  <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-[2rem] shadow-2xl transition-all duration-500 group-hover:bg-white/20 group-hover:border-white/40">
+                    
+                    {/* Title Row */}
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-2xl font-black text-white uppercase tracking-wider">
+                        {item.title}
+                      </h3>
+                      <div className="w-10 h-10 rounded-full bg-white text-[#2d5a27] flex items-center justify-center transform -rotate-45 group-hover:rotate-0 transition-transform duration-500">
+                         <FiArrowUpRight className="text-xl font-bold" />
+                      </div>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-white/90 text-base font-medium leading-relaxed line-clamp-3">
+                      {item.desc}
+                    </p>
+                    
+                    {/* Progress Bar Decoration */}
+                    <div className="w-full h-1 bg-white/20 mt-6 rounded-full overflow-hidden">
+                       <div className="h-full bg-[#4ade80] w-0 group-hover:w-full transition-all duration-700 ease-out" />
+                    </div>
                   </div>
                 </div>
 
-                {/* Content */}
-                <div className="px-2">
-                  <div className="flex items-center gap-4 mb-3">
-                    <h3 className="text-3xl font-black text-slate-900 uppercase tracking-tight group-hover:text-[#2d5a27] transition-colors duration-300">
-                      {item.title}
-                    </h3>
-                    <div className="h-[2px] flex-grow bg-slate-100 group-hover:bg-[#2d5a27]/20 transition-all duration-500" />
-                    <FiArrowUpRight className="text-2xl text-slate-300 group-hover:text-[#2d5a27] transition-all" />
-                  </div>
-                  
-                  <p className="text-slate-500 text-lg leading-relaxed font-medium">
-                    {item.desc}
-                  </p>
-                </div>
-
-                {/* Line Effect */}
-                <motion.div 
-                  className="absolute -bottom-4 left-0 h-1 bg-[#2d5a27] w-0 group-hover:w-full transition-all duration-500"
-                />
               </motion.div>
             ))}
           </div>

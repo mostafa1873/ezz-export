@@ -5,31 +5,35 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ArrowRight, Weight, Calendar, Box, Sparkles } from "lucide-react";
 import Link from "next/link";
+import artichoke from '../../assets/artichoke.fresh.jpg'
+import mix from '../../assets/product24.jpg'
+import Strawberry from '../../assets/product20.webp'
+
 
 const products = [
     {
         id: "01",
-        name: "Navel Oranges",
-        category: "Citrus",
-        description: "Our premium Navel oranges are famous for their sweet taste, deep orange color, and seedless nature.",
-        specs: { size: "48 / 56 / 64 / 72 / 80", season: "Dec - May", packing: "15 KG Cartons" },
-        image: "https://images.unsplash.com/photo-1582979512210-99b6a53386f9?q=80&w=1887&auto=format&fit=crop"
+        name: "Artichoke",
+        category: "Vegetable",
+        description: "Tender artichoke hearts, rich in fiber and antioxidants, perfect for salads, pizzas, soups, sauces, pasta, and gourmet dishes.",
+        specs: { size: "Artichoke IQF - Artichoke In Brine", season: "Dec - Apr" },
+        image: artichoke
     },
     {
         id: "02",
-        name: "Red Onions",
+        name: "Mixed vegetables",
         category: "Vegetables",
-        description: "Directly from the fertile delta soil, our red onions are known for their strong shelf life.",
-        specs: { size: "40mm - 100mm", season: "Feb - July", packing: "10 / 25 KG Mesh Bags" },
-        image: "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?q=80&w=1887&auto=format&fit=crop"
+        description: "A mix of peas, carrots, green beans, and corn, rich in vitamins, minerals, and fiber, perfect for soups, rice, stews, meats, chicken, salads, or as a sautéed side dish.",
+        specs: { size: "Mix (Green Peas, Carrots, and Sweetcorn) - Mix (Green Peas, Carrots, and Green Beans)", season: "Feb - July" },
+        image: mix
     },
     {
         id: "03",
-        name: "Fresh Potatoes",
-        category: "Tubers",
-        description: "High-quality Spunta and Mondial varieties, meeting the highest European standards.",
-        specs: { size: "35mm - 70mm", season: "Jan - June", packing: "Jumbo Bags / Cartons" },
-        image: "https://images.unsplash.com/photo-1518977676601-b53f02ac6d31?q=80&w=2070&auto=format&fit=crop"
+        name: "Strawberry",
+        category: "Fruits",
+        description: "Quick-frozen strawberries retain their flavor and texture, perfect for desserts, smoothies, and more. Available Whole, Diced, Half, or Sliced (Brix +7).",
+        specs: { size: "Festival - Fortuna - Sensation - And other types", season: "Jan - June" },
+        image: Strawberry
     }
 ];
 
@@ -118,7 +122,7 @@ const Seson = () => {
                                         src={active.image}
                                         alt={active.name}
                                         fill
-                                        className="object-cover transition-transform duration-700 hover:scale-105"
+                                        className="object-contain transition-transform duration-700 hover:scale-105"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
 
@@ -143,9 +147,8 @@ const Seson = () => {
 
                                     <div className="space-y-3">
                                         {[
-                                            { icon: Box, label: 'Available Sizes', val: active.specs.size },
+                                            { icon: Box, label: 'Available Varieties', val: active.specs.size },
                                             { icon: Calendar, label: 'Export Season', val: active.specs.season },
-                                            { icon: Weight, label: 'Packing Way', val: active.specs.packing }
                                         ].map((spec, i) => (
                                             <div key={i} className="flex items-center gap-4 p-4 bg-gray-50/50 rounded-2xl border border-gray-100 group hover:bg-green-50 transition-colors">
                                                 <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm text-green-600">
