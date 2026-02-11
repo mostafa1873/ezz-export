@@ -6,13 +6,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import { Leaf } from "lucide-react";
 
-// --- إضافة التايبات لحل مشكلة الـ Build ---
+// --- تحديث التايبات لتقبل String أو Array ---
 interface Product {
     id: string | number;
     name_en: string;
     image: string;
     category: string;
-    status: string;
+    status: string | string[]; // تقبل النوعين الآن
 }
 
 interface ProductsGridProps {
@@ -22,10 +22,19 @@ interface ProductsGridProps {
 export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
     const [filter, setFilter] = useState("all");
 
+    // تحديث منطق الفلتر ليتعامل مع الـ Array والـ String
     const filteredProducts = useMemo(() => {
-        return filter === "all"
-            ? initialProducts
-            : initialProducts.filter(p => String(p.status).toLowerCase() === filter.toLowerCase());
+        if (filter === "all") return initialProducts;
+
+        return initialProducts.filter(p => {
+            const s = p.status;
+            if (Array.isArray(s)) {
+                // لو الحالة قائمة، بنشوف لو الفلتر موجود جواها
+                return s.some(val => String(val).toLowerCase() === filter.toLowerCase());
+            }
+            // لو الحالة نص، بنقارنها مباشرة
+            return String(s).toLowerCase() === filter.toLowerCase();
+        });
     }, [filter, initialProducts]);
 
     const createSlug = (name: string) => {
@@ -36,7 +45,6 @@ export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
     };
 
     return (
-
         <section className="relative overflow-hidden">
             <div className="container mx-auto px-4 md:px-6 relative z-10">
 
@@ -144,7 +152,8 @@ export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
                                                     <span className="text-[10px] md:text-xs font-black uppercase text-[#2d5a27] tracking-wider">Egypt</span>
                                                 </div>
                                                 <span className="px-4 md:px-6 py-2 md:py-2.5 rounded-full text-[8px] md:text-[9px] font-[1000] uppercase tracking-[0.2em] text-white bg-[#2d5a27]">
-                                                    {product.status}
+                                                    {/* التعامل مع حالة أن status قد تكون قائمة عند العرض */}
+                                                    {Array.isArray(product.status) ? product.status[0] : product.status}
                                                 </span>
                                             </div>
                                         </div>
@@ -161,6 +170,5 @@ export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
                 <h2 className="text-[40vw] lg:text-[25vw] font-black text-[#051109] tracking-[-0.05em] leading-none">EZZ</h2>
             </div>
         </section>
-        
     );
 }
