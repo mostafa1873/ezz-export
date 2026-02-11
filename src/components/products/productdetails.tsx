@@ -136,7 +136,7 @@ export default function ProductContent({ product }: ProductProps) {
 
                             {/* WhatsApp Button - موسط وعريض في الموبايل */}
                             <motion.a
-                                whileHover={{ y: -4, shadow: "0px 15px 30px rgba(37, 211, 102, 0.3)" }}
+                                whileHover={{ y: -4, boxShadow: "0px 15px 30px rgba(37, 211, 102, 0.3)" }}
                                 whileTap={{ scale: 0.98 }}
                                 href={whatsappUrl}
                                 target="_blank"
