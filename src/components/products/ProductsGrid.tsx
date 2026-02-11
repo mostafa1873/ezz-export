@@ -6,7 +6,20 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import { Leaf } from "lucide-react";
 
-export default function ProductsGrid({ initialProducts }) {
+// --- إضافة التايبات لحل مشكلة الـ Build ---
+interface Product {
+    id: string | number;
+    name_en: string;
+    image: string;
+    category: string;
+    status: string;
+}
+
+interface ProductsGridProps {
+    initialProducts: Product[];
+}
+
+export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
     const [filter, setFilter] = useState("all");
 
     const filteredProducts = useMemo(() => {
@@ -15,7 +28,7 @@ export default function ProductsGrid({ initialProducts }) {
             : initialProducts.filter(p => String(p.status).toLowerCase() === filter.toLowerCase());
     }, [filter, initialProducts]);
 
-    const createSlug = (name) => {
+    const createSlug = (name: string) => {
         return name
             .toLowerCase()
             .replace(/[^a-z0-9]+/g, '-')
@@ -23,12 +36,13 @@ export default function ProductsGrid({ initialProducts }) {
     };
 
     return (
-        <section className="relative overflow-hidden"> 
+
+        <section className="relative overflow-hidden">
             <div className="container mx-auto px-4 md:px-6 relative z-10">
 
                 {/* --- HEADER SECTION --- */}
                 <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 md:gap-10 mb-12 md:mb-24">
-                    <div className="max-w-2xl text-center lg:text-left"> {/* التوسيط في الموبايل يعطي شكلاً أرقى */}
+                    <div className="max-w-2xl text-center lg:text-left">
                         <motion.div
                             initial={{ opacity: 0, y: -10 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -104,7 +118,7 @@ export default function ProductsGrid({ initialProducts }) {
                                             />
                                         </div>
 
-                                        {/* Info Box - تحسين التموضع في الموبايل */}
+                                        {/* Info Box */}
                                         <div className="p-6 md:p-10 bg-white/60 backdrop-blur-md border border-white/20 rounded-[2rem] md:rounded-[3.2rem] m-3 md:m-5 flex flex-col justify-between transition-all duration-500 shadow-[0_10px_40px_rgba(0,0,0,0.03)] group-hover:bg-white">
 
                                             <div className="flex justify-between items-start mb-4 md:mb-6">
@@ -142,10 +156,11 @@ export default function ProductsGrid({ initialProducts }) {
                 </div>
             </div>
 
-            {/* WATERMARK - جعلناه أصغر في الموبايل لمنع الخروج عن الشاشة */}
+            {/* WATERMARK */}
             <div className="absolute left-1/2 bottom-10 -translate-x-1/2 opacity-[0.02] pointer-events-none select-none">
                 <h2 className="text-[40vw] lg:text-[25vw] font-black text-[#051109] tracking-[-0.05em] leading-none">EZZ</h2>
             </div>
         </section>
+        
     );
 }
