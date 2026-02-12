@@ -36,8 +36,7 @@ const steps = [
 
 export default function AboutUsSection() {
 
-  const [openStep, setOpenStep] = useState(null);
-
+const [openStep, setOpenStep] = useState<number | null>(null);
   return (
     <>
       {/* 1. Hero Section */}
