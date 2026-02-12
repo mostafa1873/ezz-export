@@ -6,6 +6,7 @@ import WhyChooseUs from "@/components/home/whyus";
 
 
 export default function Home() {
+  
   return (
     <main className="relative bg-white">
       <Hero />
@@ -18,3 +19,5 @@ export default function Home() {
     </main>
   );
 }
+
+
