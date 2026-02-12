@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { FiArrowUpRight, FiStar } from "react-icons/fi";
@@ -35,6 +35,9 @@ const steps = [
 ];
 
 export default function AboutUsSection() {
+
+  const [openStep, setOpenStep] = useState(null);
+
   return (
     <>
       {/* 1. Hero Section */}
@@ -55,7 +58,7 @@ export default function AboutUsSection() {
               initial={{ x: -40, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.9, ease: "circOut" }}
-              viewport={{ once: true }} 
+              viewport={{ once: true }}
               className="max-w-4xl"
             >
               <h1 className="font-black uppercase tracking-[-0.06em] leading-[0.85] text-[18vw] sm:text-[14vw] md:text-[10vw] lg:text-[8vw]">
@@ -242,57 +245,58 @@ export default function AboutUsSection() {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: i * 0.15 }}
-                viewport={{ once: true, amount: 0.2 }} // يبدأ فقط عند ظهور 20% منه لتحسين الإسكرول
-                className="group relative h-[550px] w-full rounded-[2.5rem] overflow-hidden cursor-pointer transform-gpu"
+                viewport={{ once: true, amount: 0.2 }}
+                className="relative h-[550px] w-full rounded-[2.5rem] overflow-hidden cursor-pointer transform-gpu"
+                // جعل الكارت بالكامل قابل للضغط أو السهم فقط حسب رغبتك
+                onClick={() => setOpenStep(openStep === i ? null : i)}
               >
                 {/* 1. Background Image */}
                 <div className="absolute inset-0 w-full h-full">
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500 z-10" />
+                  <div className={`absolute inset-0 transition-colors duration-500 z-10 ${openStep === i ? 'bg-black/10' : 'bg-black/20'}`} />
                   <Image
                     src={item.img}
                     alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110 transform-gpu"
+                    className={`w-full h-full object-cover transition-transform duration-1000 ease-out transform-gpu ${openStep === i ? 'scale-110' : 'scale-100'}`}
                   />
                 </div>
 
                 {/* 2. Big Background Number */}
                 <div className="absolute top-4 right-6 z-10">
-                  <span className="text-[8rem] font-black text-white/10 leading-none select-none transition-transform duration-700 group-hover:-translate-y-2 group-hover:text-white/20">
+                  <span className={`text-[8rem] font-black leading-none select-none transition-transform duration-700 ${openStep === i ? '-translate-y-2 text-white/20' : 'text-white/10'}`}>
                     {item.step}
                   </span>
                 </div>
 
                 {/* 3. Floating Glass Card Content */}
-                <div className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6 z-20 
-                transition-all duration-700 ease-in-out transform 
-                translate-y-[70%] group-active:translate-y-0 group-hover:translate-y-0 will-change-transform">
+                <div className={`absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6 z-20 
+                transition-all duration-700 ease-in-out transform will-change-transform
+                ${openStep === i ? 'translate-y-0' : 'translate-y-[70%]'}`}>
 
-                  <div className="bg-black/30 backdrop-blur-md border border-white/20 p-6 md:p-8 rounded-[2rem] shadow-2xl 
-                  transition-all duration-500 group-hover:bg-black/50 group-active:bg-black/50 transform-gpu">
+                  <div className={`backdrop-blur-md border border-white/20 p-6 md:p-8 rounded-[2rem] shadow-2xl 
+                  transition-all duration-500 transform-gpu ${openStep === i ? 'bg-black/50' : 'bg-black/30'}`}>
 
                     {/* Title Row */}
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-wider">
                         {item.title}
                       </h3>
-                      <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white text-[#2d5a27] flex items-center justify-center transform -rotate-45 group-hover:rotate-0 group-active:rotate-0 transition-transform duration-500">
+                      <div className={`w-9 h-9 md:w-10 md:h-10 rounded-full bg-white text-[#2d5a27] flex items-center justify-center transition-transform duration-500 ${openStep === i ? 'rotate-0' : '-rotate-45'}`}>
                         <FiArrowUpRight className="text-lg md:text-xl font-bold" />
                       </div>
                     </div>
 
                     {/* Description */}
-                    <p className="text-white/90 text-sm md:text-base font-medium leading-relaxed line-clamp-3 
-                  opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-500 delay-100">
+                    <p className={`text-white/90 text-sm md:text-base font-medium leading-relaxed line-clamp-3 
+                    transition-opacity duration-500 delay-100 ${openStep === i ? 'opacity-100' : 'opacity-0'}`}>
                       {item.desc}
                     </p>
 
                     {/* Progress Bar Decoration */}
                     <div className="w-full h-1 bg-white/20 mt-6 rounded-full overflow-hidden">
-                      <div className="h-full bg-[#4ade80] w-0 group-hover:w-full group-active:w-full transition-all duration-700 ease-out" />
+                      <div className={`h-full bg-[#4ade80] transition-all duration-700 ease-out ${openStep === i ? 'w-full' : 'w-0'}`} />
                     </div>
                   </div>
                 </div>
-
               </motion.div>
             ))}
           </div>

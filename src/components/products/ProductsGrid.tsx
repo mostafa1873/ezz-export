@@ -1,38 +1,47 @@
 "use client";
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect, Suspense } from "react"; // ضفنا useEffect و Suspense
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation"; // ضفنا الـ Hook ده
 import { motion, AnimatePresence } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import { Leaf } from "lucide-react";
 
-// --- تحديث التايبات لتقبل String أو Array ---
 interface Product {
     id: string | number;
     name_en: string;
     image: string;
     category: string;
-    status: string | string[]; // تقبل النوعين الآن
+    status: string | string[];
 }
 
 interface ProductsGridProps {
     initialProducts: Product[];
 }
 
-export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
+// فصلنا المحتوى في Component داخلي عشان الـ useSearchParams محتاج Suspense في Next.js
+function ProductsGridContent({ initialProducts }: ProductsGridProps) {
+    const searchParams = useSearchParams();
     const [filter, setFilter] = useState("all");
 
-    // تحديث منطق الفلتر ليتعامل مع الـ Array والـ String
+    // السحر كله هنا: مراقبة الرابط وتغيير الفلتر
+    useEffect(() => {
+        const categoryFilter = searchParams.get('filter');
+        if (categoryFilter) {
+            // بنحول الـ in-brine لـ in_brine لو مبعوته بداش عشان تطابق الـ state عندك
+            const formattedFilter = categoryFilter.replace('-', '_');
+            setFilter(formattedFilter);
+        }
+    }, [searchParams]);
+
     const filteredProducts = useMemo(() => {
         if (filter === "all") return initialProducts;
 
         return initialProducts.filter(p => {
             const s = p.status;
             if (Array.isArray(s)) {
-                // لو الحالة قائمة، بنشوف لو الفلتر موجود جواها
                 return s.some(val => String(val).toLowerCase() === filter.toLowerCase());
             }
-            // لو الحالة نص، بنقارنها مباشرة
             return String(s).toLowerCase() === filter.toLowerCase();
         });
     }, [filter, initialProducts]);
@@ -45,7 +54,7 @@ export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
     };
 
     return (
-        <section className="relative overflow-hidden">
+        <section id="products-grid" className="relative overflow-hidden">
             <div className="container mx-auto px-4 md:px-6 relative z-10">
 
                 {/* --- HEADER SECTION --- */}
@@ -98,6 +107,7 @@ export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
                             })}
                         </div>
                     </div>
+
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-14">
@@ -152,17 +162,19 @@ export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
                                                     <span className="text-[10px] md:text-xs font-black uppercase text-[#2d5a27] tracking-wider">Egypt</span>
                                                 </div>
                                                 <span className="px-4 md:px-6 py-2 md:py-2.5 rounded-full text-[8px] md:text-[9px] font-[1000] uppercase tracking-[0.2em] text-white bg-[#2d5a27]">
-                                                    {/* التعامل مع حالة أن status قد تكون قائمة عند العرض */}
                                                     {Array.isArray(product.status) ? product.status[0] : product.status}
                                                 </span>
                                             </div>
                                         </div>
+
                                     </div>
                                 </Link>
+
                             </motion.div>
                         ))}
                     </AnimatePresence>
                 </div>
+
             </div>
 
             {/* WATERMARK */}
@@ -170,5 +182,13 @@ export default function ProductsGrid({ initialProducts }: ProductsGridProps) {
                 <h2 className="text-[40vw] lg:text-[25vw] font-black text-[#051109] tracking-[-0.05em] leading-none">EZZ</h2>
             </div>
         </section>
+    );
+}
+
+export default function ProductsGrid(props: ProductsGridProps) {
+    return (
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading Products...</div>}>
+            <ProductsGridContent {...props} />
+        </Suspense>
     );
 }

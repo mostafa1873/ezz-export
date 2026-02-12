@@ -1,4 +1,4 @@
-import GlobalCTA from "@/components/home/cta";
+import ExportCTA from "@/components/about/ExportCTA";
 import Hero from "@/components/home/Hero";
 import Products from "@/components/home/products";
 import WhyChooseUs from "@/components/home/whyus";
@@ -14,7 +14,7 @@ export default function Home() {
 
       <Products />
 
-      <GlobalCTA />
+      <ExportCTA/>
     </main>
   );
 }

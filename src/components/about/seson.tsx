@@ -63,6 +63,7 @@ const Seson = () => {
                             Export Grade <span className="text-[#2d5a27] ">Products</span>
                         </h3>
                     </div>
+                    
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16 items-start">
@@ -175,13 +176,13 @@ const Seson = () => {
                         <motion.button
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
-                            className="group relative w-full sm:w-auto flex items-center justify-between sm:justify-start gap-4 md:gap-8 bg-[#0a1a10] px-6 py-4 md:px-10 md:py-6 rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-2xl transition-all border border-white/5"
+                            className="group relative w-full sm:w-auto flex items-center justify-between sm:justify-start gap-4 md:gap-8 bg-[#051a10] px-6 py-4 md:px-10 md:py-6 rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-2xl transition-all border border-white/5"
                         >
                             {/* تأثير الضوء المتحرك */}
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
 
                             <div className="flex flex-col items-start text-left relative z-10">
-                                <span className="text-[8px] md:text-[10px] font-black text-[#4ade80] uppercase tracking-[0.3em] md:tracking-[0.4em] mb-0.5 md:mb-1">
+                                <span className="text-[8px] md:text-[10px] font-black text-[#fff] uppercase tracking-[0.3em] md:tracking-[0.4em] mb-0.5 md:mb-1">
                                     Discover More
                                 </span>
                                 <span className="text-white text-lg md:text-2xl font-black uppercase italic tracking-tighter leading-none">

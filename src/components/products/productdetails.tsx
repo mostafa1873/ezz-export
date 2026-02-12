@@ -343,6 +343,6 @@ export default function ProductContent({ product }: ProductProps) {
                 </div>
             </section>
         </main>
-        
+
     );
 }

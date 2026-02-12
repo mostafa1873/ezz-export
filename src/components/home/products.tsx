@@ -17,7 +17,7 @@ const categories = [
         color: "from-emerald-600/90 to-emerald-900/90",
         accent: "bg-emerald-500",
         image: fresh,
-        link: "/products/fresh"
+        link: "/products?filter=fresh#products-grid"
     },
     {
         title: "Frozen Foods",
@@ -27,7 +27,7 @@ const categories = [
         color: "from-blue-600/90 to-blue-900/90",
         accent: "bg-blue-500",
         image: iqf,
-        link: "/products/frozen"
+        link: "/products?filter=iqf#products-grid",
     },
     {
         title: "Brine Solutions",
@@ -37,7 +37,7 @@ const categories = [
         color: "from-amber-600/90 to-amber-900/90",
         accent: "bg-amber-500",
         image: brine,
-        link: "/products/brine"
+        link: "/products?filter=in_brine#products-grid",
     }
 ];
 
