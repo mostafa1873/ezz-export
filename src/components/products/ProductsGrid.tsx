@@ -16,7 +16,7 @@ interface ProductVariant {
 
 interface Product {
     id: string | number;
-    group_id: string;
+    group_id?: string;
     category: string;
     status: string | string[];
     name_en: string;
