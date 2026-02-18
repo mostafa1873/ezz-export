@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic'; // ده هيخلي الصفحة تتحمل وقت الطلب مش وقت الـ Build
 import productsData from "../../../../data/products.json"; 
 import ProductContent from "../../../../components/products/productdetails";
 import { notFound } from "next/navigation";
