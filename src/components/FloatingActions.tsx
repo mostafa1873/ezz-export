@@ -8,10 +8,9 @@ import { useTranslations } from "next-intl";
 export default function FloatingActions() {
   const t = useTranslations('FloatingActions');
   const whatsappNumber = "201109458208";
-  const catalogUrl = "/";
+  const catalogUrl = "/catalog.pdf";
 
   return (
-    /* تم تثبيت المكان في اليمين دائماً باستخدام right-4 و right-8 وإلغاء تأثير الـ RTL على التموضع */
     <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-[999] flex flex-col gap-3 md:gap-4" dir="ltr">
 
       <motion.a

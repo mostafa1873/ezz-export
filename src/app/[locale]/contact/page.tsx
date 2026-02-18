@@ -7,7 +7,7 @@ export default function ContactPage() {
   const t = useTranslations('Contact');
 
   return (
-    <main className="bg-[#fdfcf9] min-h-screen pb-20 selection:bg-[#1a3a16] selection:text-white text-left rtl:text-right">
+    <main className="bg-[#fdfcf9] min-h-screen pb-20 selection:bg-[#1a3a16] selection:text-white text-start">
 
       {/* --- Header Section --- */}
       <section className="pt-32 pb-20 px-6">
@@ -19,7 +19,7 @@ export default function ContactPage() {
                 {t('badge')}
               </span>
             </div>
-            <h1 className="text-6xl md:text-9xl text-[#1a3a16] tracking-tight">
+            <h1 className="text-6xl md:text-9xl text-[#1a3a16] tracking-tight leading-tight">
               {t.rich('title', {
                 touch: (chunks) => <span className="font-sans not-italic font-[1000] uppercase block md:inline">{chunks}</span>
               })}
@@ -84,6 +84,7 @@ export default function ContactPage() {
                   icon={<Phone className="text-[#2d5a27] group-hover:scale-110 transition-transform rtl:-scale-x-100" />}
                   title={t('directCall')}
                   value="+20 1109458208"
+                  isPhone={true}
                 />
               </a>
 
@@ -107,8 +108,7 @@ export default function ContactPage() {
 
           {/* Form Section (Right) */}
           <div className="lg:col-span-8">
-            <div className="bg-white border border-slate-100 p-8 md:p-16 rounded-[3rem] shadow-sm relative overflow-hidden text-left rtl:text-right">
-              {/* تعديل مكان الدائرة الزخرفية لتناسب العربي */}
+            <div className="bg-white border border-slate-100 p-8 md:p-16 rounded-[3rem] shadow-sm relative overflow-hidden text-start">
               <div className="absolute top-0 right-0 rtl:right-auto rtl:left-0 w-32 h-32 bg-[#2d5a27]/5 rounded-bl-full rtl:rounded-bl-none rtl:rounded-br-full pointer-events-none" />
               <div className="mb-12">
                 <h2 className="text-3xl font-[1000] text-[#1a3a16] uppercase tracking-tighter mb-2">
@@ -129,15 +129,14 @@ export default function ContactPage() {
       <section className="mt-10 px-4 md:px-6">
         <div className="max-w-7xl mx-auto h-[450px] rounded-[3.5rem] overflow-hidden border-8 border-white shadow-2xl relative">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3412.564563820986!2d29.9192!3d31.2001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDEyJzAwLjQiTiAyOcKwNTUnMDkuMSJF!5e0!3m2!1sen!2seg!4v1700000000000!5m2!1sen!2seg"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3412.3332304958184!2d32.27218!3d30.59012!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDM1JzI0LjQiTiAzMsKwMTYnMTkuOSJF!5e0!3m2!1sen!2seg!4v1700000000000!5m2!1sen!2seg"
             className="w-full h-full grayscale hover:grayscale-0 transition-all duration-1000"
             style={{ border: 0 }}
             allowFullScreen
           />
-          {/* تعديل مكان صندوق العنوان ليكون على اليمين في العربية */}
-          <div className="absolute bottom-8 left-8 rtl:left-auto rtl:right-8 bg-[#1a3a16] text-white p-6 rounded-3xl shadow-2xl max-w-xs text-left rtl:text-right">
-            <div className="flex items-start gap-4 rtl:flex-row-reverse">
-              <MapPin className="shrink-0 text-[#2d5a27]" />
+          <div className="absolute bottom-8 left-8 rtl:left-auto rtl:right-8 bg-[#1a3a16] text-white p-6 rounded-3xl shadow-2xl max-w-xs text-start">
+            <div className="flex items-start gap-4">
+              <MapPin className="shrink-0 text-[#2d5a27] mt-1" />
               <div>
                 <p className="text-[10px] font-black uppercase tracking-widest opacity-50 mb-1">{t('ourLocation')}</p>
                 <p className="text-sm font-bold leading-tight">{t('addressValue')}</p>
@@ -153,15 +152,20 @@ export default function ContactPage() {
 
 // --- Helper Components ---
 
-function InfoItem({ icon, title, value }: any) {
+function InfoItem({ icon, title, value, isPhone }: any) {
   return (
-    <div className="flex items-center gap-5 rtl:flex-row-reverse">
-      <div className="w-12 h-12 rounded-2xl bg-[#f8fcf7] flex items-center justify-center border border-slate-50">
+    <div className="flex items-center gap-5">
+      <div className="w-12 h-12 rounded-2xl bg-[#f8fcf7] flex items-center justify-center border border-slate-50 shrink-0">
         {icon}
       </div>
-      <div className="text-left rtl:text-right">
+      <div className="text-start">
         <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-0.5">{title}</p>
-        <p className="text-[#1a3a16] font-bold text-sm tracking-tight">{value}</p>
+        <p 
+          className="text-[#1a3a16] font-bold text-sm tracking-tight"
+          dir={isPhone ? "ltr" : "auto"} // ده السطر السحري اللي بيعدل الرقم
+        >
+          {value}
+        </p>
       </div>
     </div>
   );
