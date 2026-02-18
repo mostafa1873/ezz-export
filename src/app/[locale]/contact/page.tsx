@@ -134,7 +134,18 @@ export default function ContactPage() {
             style={{ border: 0 }}
             allowFullScreen
           />
-          <div className="absolute bottom-8 left-8 rtl:left-auto rtl:right-8 bg-[#1a3a16] text-white p-6 rounded-3xl shadow-2xl max-w-xs text-start">
+          <div className="
+  absolute bottom-6
+  left-1/2 -translate-x-1/2
+  w-[90%] max-w-md
+  sm:w-auto sm:max-w-xs
+  sm:left-8 sm:translate-x-0
+  rtl:left-auto rtl:right-1/2 rtl:translate-x-1/2
+  sm:rtl:right-8 sm:rtl:translate-x-0
+  bg-[#1a3a16] text-white
+  p-6 rounded-3xl shadow-2xl
+  text-start
+">
             <div className="flex items-start gap-4">
               <MapPin className="shrink-0 text-[#2d5a27] mt-1" />
               <div>
@@ -160,7 +171,7 @@ function InfoItem({ icon, title, value, isPhone }: any) {
       </div>
       <div className="text-start">
         <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-0.5">{title}</p>
-        <p 
+        <p
           className="text-[#1a3a16] font-bold text-sm tracking-tight"
           dir={isPhone ? "ltr" : "auto"} // ده السطر السحري اللي بيعدل الرقم
         >

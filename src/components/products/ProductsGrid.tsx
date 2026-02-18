@@ -157,7 +157,7 @@ function ProductsGridContent({ initialProducts }: ProductsGridProps) {
                                 className="group relative"
                             >
                                 {/* نستخدم الـ name_en دائماً في الرابط عشان الـ URL يفضل إنجليزي ونظيف */}
-                                <Link href={`/products/${createSlug(product.name_en)}`} className="block">
+                                <Link href={`/products/${createSlug(product.name_en)}`} className="block" scroll={true}>
                                     <div className="relative min-h-[500px] md:h-[600px] w-full bg-white rounded-[2.5rem] md:rounded-[4rem] overflow-hidden border border-[#2d5a27]/30 transition-all duration-700 group-hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] group-hover:-translate-y-2 flex flex-col">
 
                                         {/* Image Area */}

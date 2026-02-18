@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import productsData from "@/data/products.json";
 import { useLocale, useTranslations } from "next-intl";
+import { useEffect } from "react";
 
 interface ProductProps {
     product: any;
@@ -14,6 +15,10 @@ interface ProductProps {
 export default function ProductContent({ product }: ProductProps) {
     const locale = useLocale();
     const t = useTranslations("ProductDetails");
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [product?.id]);
 
     if (!product) return null;
 
@@ -25,17 +30,26 @@ export default function ProductContent({ product }: ProductProps) {
     const productName = product[`name_${locale}`] || product.name_en;
     const productDesc = product[`description_${locale}`] || product.description_en;
 
-    const whatsappNumber = "201234567890";
+    const whatsappNumber = "201109458208";
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Inquiry about ${product.name_en}`;
 
-    const createSlug = (name: string) =>
-        name.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    const createSlug = (name: string) => {
+        if (!name) return '';
+        return name.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    }
 
     const relatedProducts = productsData.products
-        .filter((p) => p.id !== product.id && p.category === product.category)
+        .filter((p: any) => p.id !== product.id && p.category === product.category)
         .slice(0, 4);
 
-    const features = t.raw("features");
+    // حماية صانعة الأخطاء (Safe Access for t.raw)
+    let features = [];
+    try {
+        const rawFeatures = t.raw("features");
+        features = Array.isArray(rawFeatures) ? rawFeatures : [];
+    } catch (error) {
+        features = [];
+    }
 
     return (
         <main className="bg-[#fff] min-h-screen font-sans text-[#2d2d2d] py-26" dir={dir}>
@@ -189,7 +203,7 @@ export default function ProductContent({ product }: ProductProps) {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-6 md:gap-8">
-                        {relatedProducts.map((item, idx) => (
+                        {relatedProducts.map((item: any, idx: number) => (
                             <Link
                                 key={item.id}
                                 href={`/products/${createSlug(item.name_en)}`}
