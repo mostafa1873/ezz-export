@@ -55,7 +55,7 @@ export default function Footer() {
                     </div>
 
                     <div className="flex flex-col items-center text-center lg:items-start lg:text-start">
-                        <h4 className="text-white text-xs font-black uppercase tracking-[0.2em] mb-8 italic">
+                        <h4 className="text-white text-xs font-black uppercase tracking-[0.2em] mb-8">
                             {t('navigation.title')}
                         </h4>
                         <ul className="space-y-4">
@@ -75,7 +75,7 @@ export default function Footer() {
 
                     {/* Contact */}
                     <div className="flex flex-col items-center text-center lg:items-start lg:text-start">
-                        <h4 className="text-white text-xs font-black uppercase tracking-[0.2em] mb-8 italic">
+                        <h4 className="text-white text-xs font-black uppercase tracking-[0.2em] mb-8">
                             {t('getInTouch')}
                         </h4>
                         <ul className="space-y-6 w-full">
@@ -106,7 +106,7 @@ export default function Footer() {
 
                     {/* Location */}
                     <div className="flex flex-col items-center text-center lg:items-start lg:text-start">
-                        <h4 className="text-white text-xs font-black uppercase tracking-[0.2em] mb-8 italic">
+                        <h4 className="text-white text-xs font-black uppercase tracking-[0.2em] mb-8">
                             {t('location')}
                         </h4>
                         <a

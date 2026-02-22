@@ -1,4 +1,8 @@
 {
+  "Index": {
+    "title": "Ezz Export | Leader nell'Esportazione di Prodotti Agricoli Egiziani",
+    "description": "Siamo specializzati nell'esportazione della migliore frutta e verdura fresca egiziana con standard di qualità internazionali in tutto il mondo."
+  },
   "Navbar": {
     "home": "Home",
     "about": "Chi Siamo",
@@ -22,7 +26,7 @@
   "Footer": {
     "description": "Colture agricole egiziane di prima qualità, esportate con qualità internazionale dal cuore delle fattorie egiziane ai mercati mondiali.",
     "navigation": {
-      "title": "Mappa del Sito",
+      "title": "Link Rapidi",
       "home": "Home",
       "about": "Chi Siamo",
       "products": "Prodotti",
@@ -84,6 +88,10 @@
     "chatWithUs": "Chatta con Noi"
   },
   "ProductsPage": {
+    "metadata": {
+      "title": "I Nostri Prodotti Agricoli | Esportazione Frutta e Verdura Fresca",
+      "description": "Scopri i prodotti agricoli premium di Ezz Export. Forniamo i migliori agrumi, frutta e verdura egiziana con qualità di esportazione internazionale."
+    },
     "header": {
       "our": "I Nostri",
       "products": "Prodotti",
@@ -178,6 +186,10 @@
     ]
   },
   "Contact": {
+    "metadata": {
+      "title": "Contattaci | Ezz Export per Prodotti Agricoli",
+      "description": "Hai una domanda sui nostri prodotti o desideri una partnership commerciale? Contatta ora il team di Ezz Export. Siamo qui per aiutarti a ottenere i migliori prodotti agricoli egiziani."
+    },
     "badge": "Contattaci",
     "title": "Resta in <touch>Contatto.</touch>",
     "description": "Portiamo la ricchezza del Delta del Nilo nel tuo business.",
@@ -193,15 +205,21 @@
     "addressValue": "Kafr El-Dawar, Beheira, Egitto",
     "form": {
       "fullName": "Nome Completo",
-      "fullNamePlaceholder": "es. Mario Rossi",
+      "fullNamePlaceholder": "Nome Completo",
       "email": "Indirizzo Email",
       "emailPlaceholder": "contatto@azienda.it",
       "message": "Messaggio",
       "messagePlaceholder": "Come possiamo aiutarti con le tue esigenze di export?",
-      "submit": "Invia Richiesta"
+      "submit": "Invia Richiesta",
+      "phone": "Numero di Telefono",
+      "phonePlaceholder": "Inserisci il tuo numero",
+      "successMessage": "Il tuo messaggio è stato inviato con successo! Ti contatteremo presto.",
+      "errorMessage": "Si è verificato un errore durante l'invio. Riprova."
     }
   },
   "About": {
+    "title": "Chi siamo",
+    "description": "Scopri di più su Ezz Export, la nostra storia e la nostra visione nell'esportazione dei migliori prodotti agricoli egiziani nel mondo.",
     "Hero": {
       "pure": "Partner",
       "impact": "Reale.",

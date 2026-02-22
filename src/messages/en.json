@@ -1,4 +1,8 @@
 {
+  "Index": {
+    "title": "Ezz Export | Leading Egyptian Agriculture Exporter",
+    "description": "We specialize in exporting the finest fresh Egyptian fruits and vegetables with international quality standards worldwide."
+  },
   "Navbar": {
     "home": "Home",
     "about": "About Us",
@@ -22,7 +26,7 @@
   "Footer": {
     "description": "Premium Egyptian agricultural crops, exported with international quality from the heart of Egyptian farms to international markets.",
     "navigation": {
-      "title": "Sitemap",
+      "title": "Quick Links",
       "home": "Home",
       "about": "About Us",
       "products": "Products",
@@ -84,6 +88,10 @@
     "chatWithUs": "Chat with Us"
   },
   "ProductsPage": {
+    "metadata": {
+      "title": "Our Agricultural Products | Exporting Fresh Fruits & Vegetables",
+      "description": "Explore Ezz Export's premium agricultural products. We provide the finest Egyptian citrus, fruits, and vegetables with international export quality."
+    },
     "header": {
       "our": "Our Premium",
       "products": "Products",
@@ -178,6 +186,10 @@
     ]
   },
   "Contact": {
+    "metadata": {
+      "title": "Contact Us | Ezz Export for Agricultural Products",
+      "description": "Have a question about our products or want a business partnership? Contact the Ezz Export team now. We are here to help you get the best Egyptian agricultural products."
+    },
     "badge": "Contact Us",
     "title": "Stay in <touch>Touch.</touch>",
     "description": "We bring the richness of the Nile Delta to your business. Contact our expert team for global export inquiries.",
@@ -193,15 +205,21 @@
     "addressValue": "Kafr El-Dawar, Beheira, Egypt",
     "form": {
       "fullName": "Full Name",
-      "fullNamePlaceholder": "e.g., John Doe",
+      "fullNamePlaceholder": "Full Name",
       "email": "Email Address",
       "emailPlaceholder": "contact@company.com",
       "message": "Message",
       "messagePlaceholder": "How can we help with your export needs?",
-      "submit": "Send Inquiry"
+      "submit": "Send Inquiry",
+      "phone": "Phone Number",
+      "phonePlaceholder": "Enter your phone number",
+      "successMessage": "Your message has been sent successfully! We'll contact you soon.",
+      "errorMessage": "An error occurred while sending. Please try again."
     }
   },
   "About": {
+    "title": "About Us",
+    "description": "Learn more about Ezz Export, our history, and our vision in exporting the finest Egyptian agricultural products to the world.",
     "Hero": {
       "pure": "True",
       "impact": "Partner.",

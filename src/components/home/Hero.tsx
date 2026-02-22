@@ -62,6 +62,7 @@ export default function CinematicHero() {
     const reduceMotion = useReducedMotion();
 
     return (
+
         <section className="relative w-full min-h-screen bg-[#fff] overflow-hidden flex flex-col items-center justify-center pt-32 lg:pt-28">
             {/* Background Text - Added transform-gpu to optimize large text rendering */}
             <div className="absolute inset-0 flex items-center justify-center opacity-[0.04] select-none pointer-events-none transform-gpu">
@@ -96,10 +97,10 @@ export default function CinematicHero() {
                             </h1>
 
                             {/* Mobile Image - Optimized with priority */}
-                            <div className="relative w-48 h-48 mx-auto mb-8 block lg:hidden">
+                            <div className="relative w-60 h-60 mx-auto mb-8 block lg:hidden">
                                 <Image
                                     src={arch}
-                                    alt="Orange mobile"
+                                    alt="Ezz products"
                                     fill
                                     priority
                                     sizes="192px"
@@ -133,7 +134,7 @@ export default function CinematicHero() {
 
                     {/* Desktop Image */}
                     <div className="w-full lg:w-1/2 relative hidden lg:flex justify-center items-center h-[600px]">
-                        <div className="absolute w-[450px] h-[450px] bg-green-100/40 rounded-full blur-[80px]" />
+                        <div className="absolute w-[450px] h-[450px]  rounded-full blur-[80px]" />
 
                         <motion.div
                             animate={
@@ -142,14 +143,14 @@ export default function CinematicHero() {
                                     : { y: [0, -20, 0], rotate: [0, 5, 0] }
                             }
                             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                            className="relative w-[480px] h-[480px] z-20 will-change-transform transform-gpu"
+                            className="relative w-[550px] h-[550px] z-20 will-change-transform transform-gpu"
                         >
                             <Image
                                 src={arch}
-                                alt="Main Orange"
+                                alt="Ezz products"
                                 fill
                                 priority
-                                sizes="480px"
+                                sizes="(min-width: 1024px) 550px, 100vw"
                                 className="object-contain"
                             />
                         </motion.div>

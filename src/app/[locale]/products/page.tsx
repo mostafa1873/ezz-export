@@ -3,15 +3,45 @@ import productsData from "@/data/products.json";
 import { FiArrowDown, FiCheck, FiArrowUpRight, FiGlobe, FiTarget } from "react-icons/fi";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
+import { Metadata } from "next";
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> | { locale: string } }) {
+// إضافة الـ Metadata مع الحفاظ على المنطق الخاص بك وتحسينه
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> | { locale: string } }): Promise<Metadata> {
   const { locale } = await (params as any);
 
-  const t = await getTranslations({ locale, namespace: 'ProductsPage.header' });
+  // جلب الترجمات الخاصة بالميتا تاجز
+  const t = await getTranslations({ locale, namespace: 'ProductsPage' });
 
   return {
-    title: `Ezz Export | ${t('our')} ${t('products')}`,
-    description: t('subtitle'),
+    title: t('metadata.title'),
+    description: t('metadata.description'),
+    // تحسين SEO: الكلمات المفتاحية والروابط البديلة
+    keywords: locale === 'ar'
+      ? ["تصدير فواكه", "خضروات مصرية", "عز اكسبورت", "منتجات زراعية"]
+      : ["Fruit export", "Egyptian vegetables", "Ezz Export", "Agricultural products"],
+    alternates: {
+      canonical: `https://ezzexport.com/${locale}/products`,
+    },
+    openGraph: {
+      title: t('metadata.title'),
+      description: t('metadata.description'),
+      url: `https://ezzexport.com/${locale}/products`,
+      siteName: "Ezz Export",
+      images: [
+        {
+          url: "/og-image.webp", // الصورة التي اتفقنا عليها
+          width: 1200,
+          height: 630,
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t('metadata.title'),
+      description: t('metadata.description'),
+      images: ["/og-image.webp"],
+    }
   };
 }
 

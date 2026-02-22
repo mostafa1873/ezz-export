@@ -1,7 +1,43 @@
 import React from "react";
 import { Mail, Phone, MapPin, Globe, Instagram, Linkedin, Facebook, Clock } from "lucide-react";
 import ContactForm from "@/components/contact/ContactForm";
+import { getTranslations } from "next-intl/server";
 import { useTranslations } from "next-intl";
+import { Metadata } from "next";
+
+// إضافة الـ Metadata للصفحة
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Contact' });
+
+  return {
+    title: t('metadata.title'),
+    description: t('metadata.description'),
+    alternates: {
+      canonical: `https://ezzexport.com/${locale}/contact`,
+    },
+    openGraph: {
+      title: t('metadata.title'),
+      description: t('metadata.description'),
+      url: `https://ezzexport.com/${locale}/contact`,
+      siteName: "Ezz Export",
+      images: [
+        {
+          url: "/og-image.webp",
+          width: 1200,
+          height: 630,
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t('metadata.title'),
+      description: t('metadata.description'),
+      images: ["/og-image.webp"],
+    }
+  };
+}
 
 export default function ContactPage() {
   const t = useTranslations('Contact');
@@ -129,7 +165,7 @@ export default function ContactPage() {
       <section className="mt-10 px-4 md:px-6">
         <div className="max-w-7xl mx-auto h-[450px] rounded-[3.5rem] overflow-hidden border-8 border-white shadow-2xl relative">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3412.3332304958184!2d32.27218!3d30.59012!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDM1JzI0LjQiTiAzMsKwMTYnMTkuOSJF!5e0!3m2!1sen!2seg!4v1700000000000!5m2!1sen!2seg"
+            src="https://www.google.com/maps/embed?pb=YOUR_EMBED_CODE_HERE"
             className="w-full h-full grayscale hover:grayscale-0 transition-all duration-1000"
             style={{ border: 0 }}
             allowFullScreen
@@ -173,19 +209,11 @@ function InfoItem({ icon, title, value, isPhone }: any) {
         <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-0.5">{title}</p>
         <p
           className="text-[#1a3a16] font-bold text-sm tracking-tight"
-          dir={isPhone ? "ltr" : "auto"} // ده السطر السحري اللي بيعدل الرقم
+          dir={isPhone ? "ltr" : "auto"}
         >
           {value}
         </p>
       </div>
-    </div>
-  );
-}
-
-function SocialLink({ icon }: any) {
-  return (
-    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-[#1a3a16] transition-all cursor-pointer border border-white/5 shadow-sm">
-      {icon}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "../../components/navbar";
@@ -7,7 +7,7 @@ import FloatingActions from "../../components/FloatingActions";
 
 // إضافات مكتبة الترجمة
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getMessages, getTranslations } from 'next-intl/server';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,30 +19,112 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Ezz Export",
-  description: "EZZ Export",
-  icons: {
-    icon: [
-      {
-        url: "/icon.png",
-        href: "/icon.png",
-      },
-    ],
-  },
+// إعدادات الـ Viewport لضمان التجاوب وسرعة الأداء
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#2d5a27", // لون براند الشركة للمتصفحات
 };
+
+// دالة توليد الـ Metadata الشاملة
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Index' });
+
+  const baseUrl = "https://ezzexport.com";
+
+  return {
+    // 1. العناوين والوصف الأساسي
+    title: {
+      default: t('title'),
+      template: `%s | Ezz Export`
+    },
+    description: t('description'),
+    metadataBase: new URL(baseUrl),
+
+    // 2. الكلمات المفتاحية (Keywords)
+    keywords: ["Ezz Export", "Export Egypt", "Fresh fruits export", "Egyptian vegetables", "Agricultural products Egypt"],
+
+    // 3. روابط اللغة والأرشفة (Canonical & Hreflang)
+    alternates: {
+      canonical: `${baseUrl}/${locale}`,
+      languages: {
+        ar: `${baseUrl}/ar`,
+        en: `${baseUrl}/en`,
+        it: `${baseUrl}/it`,
+        "x-default": `${baseUrl}/en`,
+      },
+    },
+
+    // 4. إعدادات السوشيال ميديا (OpenGraph - Facebook/LinkedIn)
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+      url: `${baseUrl}/${locale}`,
+      siteName: "Ezz Export",
+      locale: locale === 'ar' ? 'ar_EG' : locale === 'it' ? 'it_IT' : 'en_US',
+      type: "website",
+      images: [
+        {
+          url: "/og-image.webp", // تأكد من وجود صورة بهذا الاسم في folder public
+          width: 1200,
+          height: 630,
+          alt: "Ezz Export - Egyptian Agricultural Excellence",
+        },
+      ],
+    },
+
+    // 5. إعدادات تويتر (Twitter Card)
+    twitter: {
+      card: "summary_large_image",
+      title: t('title'),
+      description: t('description'),
+      images: ["/og-image.webp"],
+    },
+
+    // 6. تعليمات الروبوتات (Robots)
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+
+    // 7. الأيقونات (Favicons)
+    icons: {
+      icon: [
+        { url: "/favicon.png" },
+        { url: "/favicon.png", type: "image/png" },
+      ],
+      apple: [
+        { url: "/apple-touch-icon.png" },
+      ],
+    },
+
+    // 8. التحقق من ملكية الموقع (اختياري)
+    verification: {
+      google: "google-site-verification-code", // ضعه هنا لو متاح
+    },
+  };
+}
 
 export default async function RootLayout({
   children,
   params,
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ locale: string }>; // تعديل: الـ params هنا Promise
+  params: Promise<{ locale: string }>;
 }>) {
-  // فك الـ Promise للحصول على الـ locale (مهم جداً في Next.js 15)
+  // فك الـ Promise للحصول على الـ locale
   const { locale } = await params;
 
-  // جلب ملفات اللغة (JSON) بناءً على الـ locale الحالي
+  // جلب ملفات اللغة
   const messages = await getMessages();
   const direction = locale === "ar" ? "rtl" : "ltr";
 
@@ -51,7 +133,6 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* تغليف المكونات بالـ Provider لضمان وصول الترجمة لكل مكان */}
         <NextIntlClientProvider messages={messages}>
           <Navbar />
           {children}
