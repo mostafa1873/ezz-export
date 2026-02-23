@@ -1,5 +1,5 @@
 import Image from "next/image";
-const LOGO_PATH = "/icon.png"; 
+const LOGO_PATH = "/favicon.png"; 
 
 export default function Loading() {
   return (
