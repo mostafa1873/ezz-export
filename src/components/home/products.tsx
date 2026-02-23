@@ -1,9 +1,11 @@
 "use client";
 
+// 1. إضافة useEffect و UseLayoutEffect للتحكم في الـ Scroll
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useTranslations } from "next-intl"; 
+import { useTranslations } from "next-intl";
 import { Snowflake, Droplets, Leaf, ArrowRight } from "lucide-react";
 import iqf from '../../assets/iqf.webp';
 import fresh from '../../assets/fresh.webp';
@@ -11,6 +13,26 @@ import brine from '../../assets/in-brine.webp';
 
 const ProductCategories = () => {
     const t = useTranslations('categories');
+
+    // --- الجزء المضاف لحل مشكلة الـ Hash على Vercel ---
+    useEffect(() => {
+        // التأكد من أن الكود يعمل فقط عند الضغط على لينك فيه Hash
+        const handleHashScroll = () => {
+            const hash = window.location.hash;
+            if (hash) {
+                const element = document.querySelector(hash);
+                if (element) {
+                    setTimeout(() => {
+                        element.scrollIntoView({ behavior: "smooth" });
+                    }, 100);
+                }
+            }
+        };
+
+        // تشغيل الدالة عند تحميل المكون
+        handleHashScroll();
+    }, []);
+    // ----------------------------------------------
 
     const categoriesData = [
         {
