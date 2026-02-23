@@ -39,6 +39,21 @@ function ProductsGridContent({ initialProducts }: ProductsGridProps) {
     const t = useTranslations('ProductsPage.grid');
     const locale = useLocale();
 
+    // --- الجزء المضاف للتحكم في الـ Scroll عند وجود Hash في الرابط ---
+    useEffect(() => {
+        const hash = window.location.hash;
+        if (hash === "#products-grid") {
+            const element = document.getElementById("products-grid");
+            if (element) {
+                // نستخدم setTimeout لضمان أن المتصفح انتهى من رندر الصور والمنتجات
+                setTimeout(() => {
+                    element.scrollIntoView({ behavior: "smooth", block: "start" });
+                }, 800); 
+            }
+        }
+    }, [searchParams]); // يعمل عند تغيير الفلتر أو تحميل الصفحة لأول مرة
+    // -------------------------------------------------------
+
     useEffect(() => {
         const categoryFilter = searchParams.get('filter');
         if (categoryFilter) {
@@ -156,7 +171,6 @@ function ProductsGridContent({ initialProducts }: ProductsGridProps) {
                                 transition={{ duration: 0.3, delay: Math.min(index * 0.05, 0.3) }}
                                 className="group relative"
                             >
-                                {/* نستخدم الـ name_en دائماً في الرابط عشان الـ URL يفضل إنجليزي ونظيف */}
                                 <Link href={`/products/${createSlug(product.name_en)}`} className="block" scroll={true}>
                                     <div className="relative min-h-[500px] md:h-[600px] w-full bg-white rounded-[2.5rem] md:rounded-[4rem] overflow-hidden border border-[#2d5a27]/30 transition-all duration-700 group-hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] group-hover:-translate-y-2 flex flex-col">
 
@@ -188,7 +202,6 @@ function ProductsGridContent({ initialProducts }: ProductsGridProps) {
                                                     </h3>
                                                 </div>
                                                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#2d5a27] text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-4 group-hover:translate-x-0 rtl:-translate-x-4 rtl:group-hover:translate-x-0 shadow-2xl shrink-0">
-                                                    {/* تم تعديل الانعكاس ليناسب اتجاه السهم في اللغة العربية */}
                                                     <FiArrowUpRight size={20} className="rtl:-scale-x-100" />
                                                 </div>
                                             </div>
