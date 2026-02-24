@@ -12,6 +12,7 @@ const AboutFluid = () => {
   const t = useTranslations('WhyUs');
 
   return (
+
     <section className="py-12 bg-[#fefefe] relative overflow-hidden">
 
       <div className="max-w-7xl mx-auto px-6 relative">
@@ -112,6 +113,7 @@ const AboutFluid = () => {
 
             <div className="lg:col-span-7 flex flex-col justify-between h-full space-y-12 lg:pl-10 rtl:lg:pl-0 rtl:lg:pr-10">
               <div className="space-y-12">
+                {/* المكون الأول - هيفضل زي ما هو */}
                 <motion.div
                   initial={{ opacity: 0, x: 40 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -130,14 +132,18 @@ const AboutFluid = () => {
                   </p>
                 </motion.div>
 
+                {/* المكون الثاني - التعديل هنا فقط في الكلاسات لضبط الموبايل */}
                 <motion.div
                   initial={{ opacity: 0, x: 40 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 }}
-                  className="max-w-md md:ml-auto md:rtl:mr-auto md:rtl:ml-0 relative text-right rtl:text-left"
+                  // خليناه text-left في الموبايل و text-right بيبدأ من الـ md (Desktop)
+                  className="max-w-md md:ml-auto md:rtl:mr-auto md:rtl:ml-0 relative text-left rtl:text-right md:text-right md:rtl:text-left"
                 >
-                  <div className="absolute -right-6 rtl:right-auto rtl:-left-6 top-0 w-1 h-full bg-green-50 rounded-full" />
+                  {/* الـ Bar هنا كمان هيبدأ من الشمال في الموبايل ويروح يمين في الـ Desktop */}
+                  <div className="absolute -left-6 rtl:left-auto rtl:-right-6 md:-left-auto md:-right-6 md:rtl:right-auto md:rtl:-left-6 top-0 w-1 h-full bg-green-50 rounded-full" />
+
                   <h4 className="text-xs font-black text-gray-400 mb-3 tracking-[0.3em] uppercase">
                     {t('ourWord.title')}
                   </h4>
@@ -183,6 +189,7 @@ const AboutFluid = () => {
       </div>
 
     </section>
+
   );
 };
 
