@@ -4,7 +4,7 @@ import React, { memo } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { FiArrowUpRight, FiBox, FiGlobe, FiPhone } from "react-icons/fi";
-import arch from "../../assets/arch.png";
+import arch from "../../assets/arch.webp";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 

@@ -3,3 +3,7 @@
 html {
   scroll-behavior: smooth;
 }
+
+[lang="ar"] * {
+    letter-spacing: normal !important;
+}

@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { Sparkles, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import imgMain from '../../assets/mainImg.png'
+import imgMain from '../../assets/mainImg.webp'
 import { useTranslations } from "next-intl";
 
 const AboutFluid = () => {
