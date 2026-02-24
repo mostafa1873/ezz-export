@@ -14,9 +14,7 @@ import brine from '../../assets/in-brine.webp';
 const ProductCategories = () => {
     const t = useTranslations('categories');
 
-    // --- الجزء المضاف لحل مشكلة الـ Hash على Vercel ---
     useEffect(() => {
-        // التأكد من أن الكود يعمل فقط عند الضغط على لينك فيه Hash
         const handleHashScroll = () => {
             const hash = window.location.hash;
             if (hash) {

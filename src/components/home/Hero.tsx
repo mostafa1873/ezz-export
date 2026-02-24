@@ -97,7 +97,7 @@ export default function CinematicHero() {
                             </h1>
 
                             {/* Mobile Image - Optimized with priority */}
-                            <div className="relative w-60 h-60 mx-auto mb-8 block lg:hidden">
+                            <div className="relative w-75 h-75 mx-auto mb-8 block lg:hidden">
                                 <Image
                                     src={arch}
                                     alt="Ezz products"
