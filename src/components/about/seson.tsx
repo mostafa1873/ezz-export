@@ -5,8 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ArrowRight, Weight, Calendar, Box, Sparkles } from "lucide-react";
 import Link from "next/link";
-import artichoke from '../../assets/artichoke.fresh.jpg'
-import mix from '../../assets/product24.jpg'
+import artichoke from '../../assets/artichoke.fresh.webp'
+import mix from '../../assets/product24.webp'
 import Strawberry from '../../assets/product20.webp'
 import { useTranslations } from "next-intl";
 

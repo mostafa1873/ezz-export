@@ -4,14 +4,14 @@ import React, { useState, memo } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { FiArrowDown, FiArrowUpRight, FiGlobe, FiPhone, FiStar } from "react-icons/fi";
-import arch from "../../assets/about-hero.png";
+import arch from "../../assets/about-hero.webp";
 import about from "../../assets/about-main.webp";
 import Link from "next/link";
 import Seson from "./seson";
 import ExportCTA from "./ExportCTA";
-import pro1 from "../../assets/pro1.png";
-import pro2 from "../../assets/pro2.png";
-import pro3 from "../../assets/pro3.png";
+import pro1 from "../../assets/pro1.webp";
+import pro2 from "../../assets/pro2.webp";
+import pro3 from "../../assets/pro3.webp";
 import { useLocale, useTranslations } from "next-intl";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 

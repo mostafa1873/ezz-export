@@ -4,6 +4,8 @@ html {
   scroll-behavior: smooth;
 }
 
+[dir="rtl"] *, 
 [lang="ar"] * {
-    letter-spacing: normal !important;
+    letter-spacing: 0 !important;
+    word-spacing: normal !important;
 }
