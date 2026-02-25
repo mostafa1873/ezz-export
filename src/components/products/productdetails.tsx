@@ -17,7 +17,11 @@ export default function ProductContent({ product }: ProductProps) {
     const t = useTranslations("ProductDetails");
 
     useEffect(() => {
-        window.scrollTo(0, 0);
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'instant'
+        });
     }, [product?.id]);
 
     if (!product) return null;
@@ -26,17 +30,22 @@ export default function ProductContent({ product }: ProductProps) {
     const dir = isRTL ? "rtl" : "ltr";
 
     const imagePath = product.image ? product.image.replace("../", "/") : "/placeholder.png";
+    const catalogPath = "/catalog.pdf";
 
     const productName = product[`name_${locale}`] || product.name_en;
     const productDesc = product[`description_${locale}`] || product.description_en;
 
     const whatsappNumber = "201109458208";
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Inquiry about ${product.name_en}`;
-
-    const createSlug = (name: string) => {
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(isRTL ? 'استفسار عن ' : 'Inquiry about ')} ${productName}`;
+    const createSlug = (name: string, id: string | number) => {
         if (!name) return '';
-        return name.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-    }
+        const slug = name
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '');
+        return `${slug}-${id}`;
+    };
 
     const relatedProducts = productsData.products
         .filter((p: any) => p.id !== product.id && p.category === product.category)
@@ -113,14 +122,14 @@ export default function ProductContent({ product }: ProductProps) {
                     </motion.div>
 
                     {/* RIGHT: INFO SECTION */}
-                    <div className="flex flex-col items-center text-center lg:items-start lg:text-left pt-2 md:pt-4">
+                    <div className="flex flex-col items-center text-center lg:items-start lg:text-left rtl:lg:text-right pt-2 md:pt-4">
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.2 }}
                             className="w-full flex flex-col items-center lg:items-start"
                         >
-                            <div className="hidden lg:block w-full rtl:text-right text-left">
+                            <div className="hidden lg:block w-full text-left rtl:text-right">
                                 <span className="inline-block px-3 py-1 bg-green-50 text-green-700 text-[10px] font-bold uppercase tracking-widest rounded-full mb-4 md:mb-6">
                                     {t("directFromFarms")}
                                 </span>
@@ -129,12 +138,12 @@ export default function ProductContent({ product }: ProductProps) {
                                 </h1>
                             </div>
 
-                            <p className="text-gray-500 text-base md:text-lg leading-relaxed mb-8 md:mb-10 font-normal max-w-lg">
+                            <p className="text-gray-500 text-base md:text-lg leading-relaxed mb-8 md:mb-10 font-normal max-w-lg text-center lg:text-left rtl:lg:text-right">
                                 {productDesc}
                             </p>
 
                             {/* Variants - مترجمة ديناميكياً */}
-                            <div className="mb-8 md:mb-10 w-full">
+                            <div className="mb-8 md:mb-10 w-full text-center lg:text-left rtl:lg:text-right">
                                 <h3 className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-4">{t("availableSelection")}</h3>
                                 <div className="flex flex-wrap justify-center lg:justify-start gap-2 md:gap-3">
                                     {product.variants?.map((v: any, i: number) => (
@@ -156,27 +165,29 @@ export default function ProductContent({ product }: ProductProps) {
                                 </div>
                             </div>
 
-                            <motion.a
-                                whileHover={{ y: -4, boxShadow: "0px 15px 30px rgba(37, 211, 102, 0.3)" }}
-                                whileTap={{ scale: 0.98 }}
-                                href={whatsappUrl}
-                                target="_blank"
-                                className="flex items-center w-auto justify-center gap-3 bg-[#25D366] text-white px-8 py-4 md:py-5 rounded-full shadow-lg transition-all duration-300 group w-full sm:w-auto"
-                            >
-                                <svg
-                                    stroke="currentColor"
-                                    fill="currentColor"
-                                    viewBox="0 0 448 512"
-                                    height="24"
-                                    width="24"
-                                    xmlns="http://www.w3.org/2000/svg"
+                            <div className="w-full flex justify-center">
+                                <motion.a
+                                    whileHover={{ y: -4, boxShadow: "0px 15px 30px rgba(37, 211, 102, 0.3)" }}
+                                    whileTap={{ scale: 0.98 }}
+                                    href={whatsappUrl}
+                                    target="_blank"
+                                    className="flex items-center justify-center gap-3 bg-[#25D366] text-white px-10 py-4 md:py-5 rounded-full shadow-lg transition-all duration-300 group w-full sm:w-auto"
                                 >
-                                    <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.1 0-65.6-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.4-8.6-44.6-27.6-16.5-14.7-27.6-32.8-30.8-38.4-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.2 3.7-5.5 5.6-9.2 1.9-3.7 1-7-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.3 5.7 23.7 9.1 31.7 11.7 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"></path>
-                                </svg>
-                                <span className="text-base md:text-lg font-bold tracking-tight">
-                                    {t("contactWhatsApp")}
-                                </span>
-                            </motion.a>
+                                    <svg
+                                        stroke="currentColor"
+                                        fill="currentColor"
+                                        viewBox="0 0 448 512"
+                                        height="24"
+                                        width="24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.1 0-65.6-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.4-8.6-44.6-27.6-16.5-14.7-27.6-32.8-30.8-38.4-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.2 3.7-5.5 5.6-9.2 1.9-3.7 1-7-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.3 5.7 23.7 9.1 31.7 11.7 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"></path>
+                                    </svg>
+                                    <span className="text-base md:text-lg font-bold tracking-tight">
+                                        {t("contactWhatsApp")}
+                                    </span>
+                                </motion.a>
+                            </div>
                         </motion.div>
                     </div>
                 </div>
@@ -204,9 +215,11 @@ export default function ProductContent({ product }: ProductProps) {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-6 md:gap-8">
                         {relatedProducts.map((item: any, idx: number) => (
+                            // البحث عن السطر ده وتعديله
                             <Link
                                 key={item.id}
-                                href={`/products/${createSlug(item.name_en)}`}
+                                scroll={false}
+                                href={`/products/${createSlug(item.name_en, item.id)}`}
                                 className={`group relative ${idx % 2 !== 0 ? 'md:mt-16' : ''}`}
                             >
                                 <div className="relative aspect-square flex items-center justify-center max-w-[280px] mx-auto md:max-w-none">
@@ -296,19 +309,26 @@ export default function ProductContent({ product }: ProductProps) {
                                 </div>
                             </motion.a>
 
-                            <motion.button
+                            <motion.a
                                 whileHover={{ y: -5 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="group w-full sm:w-auto px-8 md:px-12 py-5 md:py-6 border-2 border-gray-200 rounded-full flex items-center justify-center gap-6 hover:border-[#2d5a27] hover:bg-[#2d5a27]/5 transition-all duration-300"
+                                href={catalogPath} // المسار اللي عرفناه فوق
+                                download // الخاصية دي بتخلي المتصفح يحمل الملف بدل ما يفتحه
+                                target="_blank"
+                                className="group w-full sm:w-auto px-8 md:px-12 py-5 md:py-6 border-2 border-gray-200 rounded-full flex items-center justify-center gap-6 hover:border-[#2d5a27] hover:bg-[#2d5a27]/5 transition-all duration-300 cursor-pointer"
                             >
                                 <div className={`flex flex-col ${isRTL ? "items-end" : "items-start"}`}>
-                                    <span className="text-[9px] font-medium text-gray-400 uppercase tracking-tighter leading-none mb-1">{t("availablePdf")}</span>
-                                    <span className="font-black text-[#1a1a1a] uppercase text-[11px] md:text-xs tracking-[0.1em] md:tracking-[0.15em]">{t("downloadCatalog")}</span>
+                                    <span className="text-[9px] font-medium text-gray-400 uppercase tracking-tighter leading-none mb-1">
+                                        {t("availablePdf")}
+                                    </span>
+                                    <span className="font-black text-[#1a1a1a] uppercase text-[11px] md:text-xs tracking-[0.1em] md:tracking-[0.15em]">
+                                        {t("downloadCatalog")}
+                                    </span>
                                 </div>
                                 <div className="w-9 h-9 md:w-10 md:h-10 rounded-full border border-gray-100 flex items-center justify-center text-[#2d5a27] group-hover:bg-[#2d5a27] group-hover:text-white transition-all shrink-0">
                                     <FiDownload size={18} />
                                 </div>
-                            </motion.button>
+                            </motion.a>
                         </div>
                     </div>
 

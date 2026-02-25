@@ -101,9 +101,9 @@ const HeroSection = memo(() => {
               {/* أيقونات السوشيال */}
               <div className="items-center gap-4 hidden lg:flex">
                 {[
-                  { Icon: FaFacebookF, href: "#" },
-                  { Icon: FaInstagram, href: "#" },
-                  { Icon: FaLinkedinIn, href: "#" }
+                  { Icon: FaFacebookF, href: "https://web.facebook.com/profile.php?id=61582088223661" },
+                  { Icon: FaInstagram, href: "https://www.instagram.com/ezzexport/?fbclid=IwY2xjawNsKVpleHRuA2FlbQIxMQBicmlkETEwN2xjblIzdTRhNmpKZ2tPAR7k_hx9Tk12NMj34rMICVpeqJavdX_0OOiGNwksXLF4QkQh6xjWh5Z9BqjD0w_aem_EiVZGu7OHrur6W-PHTp5Eg" },
+                  { Icon: FaLinkedinIn, href: "https://www.linkedin.com/company/ezz-export" }
                 ].map((item, i) => (
                   <a
                     key={i}

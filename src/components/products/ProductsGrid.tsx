@@ -2,7 +2,7 @@
 import React, { useState, useMemo, useEffect, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams , useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import { Leaf } from "lucide-react";
@@ -35,6 +35,7 @@ interface ProductsGridProps {
 
 function ProductsGridContent({ initialProducts }: ProductsGridProps) {
     const searchParams = useSearchParams();
+    const router = useRouter();
     const [filter, setFilter] = useState("all");
     const t = useTranslations('ProductsPage.grid');
     const locale = useLocale();
@@ -48,7 +49,7 @@ function ProductsGridContent({ initialProducts }: ProductsGridProps) {
                 // نستخدم setTimeout لضمان أن المتصفح انتهى من رندر الصور والمنتجات
                 setTimeout(() => {
                     element.scrollIntoView({ behavior: "smooth", block: "start" });
-                }, 800); 
+                }, 800);
             }
         }
     }, [searchParams]); // يعمل عند تغيير الفلتر أو تحميل الصفحة لأول مرة
@@ -59,6 +60,8 @@ function ProductsGridContent({ initialProducts }: ProductsGridProps) {
         if (categoryFilter) {
             const formattedFilter = categoryFilter.replace('-', '_');
             setFilter(formattedFilter);
+        } else {
+            setFilter("all"); // لو مفيش فلتر في الرابط نرجعه للكل
         }
     }, [searchParams]);
 
@@ -74,11 +77,14 @@ function ProductsGridContent({ initialProducts }: ProductsGridProps) {
         });
     }, [filter, initialProducts]);
 
-    const createSlug = (name: string) => {
-        return name
+    const createSlug = (name: string, id: string | number) => {
+        const baseSlug = name
             .toLowerCase()
+            .trim()
             .replace(/[^a-z0-9]+/g, '-')
             .replace(/^-+|-+$/g, '');
+
+        return `${baseSlug}-${id}`;
     };
 
     const getLocalizedContent = (product: Product, field: string) => {
@@ -140,8 +146,17 @@ function ProductsGridContent({ initialProducts }: ProductsGridProps) {
                                 return (
                                     <button
                                         key={f}
-                                        onClick={() => setFilter(f)}
-                                        className={`relative px-3 py-2.5 sm:px-6 sm:py-3 rounded-2xl sm:rounded-full text-[8px] md:text-[9px] font-black uppercase tracking-[0.1em] md:tracking-[0.2em] transition-all duration-500 z-10 ${isActive ? 'text-white' : 'text-slate-500 hover:text-[#051109]'
+                                        onClick={() => {
+                                            const params = new URLSearchParams(searchParams.toString());
+                                            if (f === 'all') {
+                                                params.delete('filter');
+                                            } else {
+                                                params.set('filter', f.replace('_', '-'));
+                                            }
+                                            // التغيير هنا بيحدث الرابط بدون إعادة تحميل الصفحة
+                                            router.push(`?${params.toString()}`, { scroll: false });
+                                            setFilter(f);
+                                        }} className={`relative px-3 py-2.5 sm:px-6 sm:py-3 rounded-2xl sm:rounded-full text-[8px] md:text-[9px] font-black uppercase tracking-[0.1em] md:tracking-[0.2em] transition-all duration-500 z-10 ${isActive ? 'text-white' : 'text-slate-500 hover:text-[#051109]'
                                             }`}
                                     >
                                         {isActive && (
@@ -171,8 +186,11 @@ function ProductsGridContent({ initialProducts }: ProductsGridProps) {
                                 transition={{ duration: 0.3, delay: Math.min(index * 0.05, 0.3) }}
                                 className="group relative"
                             >
-                                <Link href={`/products/${createSlug(product.name_en)}`} className="block" scroll={true}>
-                                    <div className="relative min-h-[500px] md:h-[600px] w-full bg-white rounded-[2.5rem] md:rounded-[4rem] overflow-hidden border border-[#2d5a27]/30 transition-all duration-700 group-hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] group-hover:-translate-y-2 flex flex-col">
+                                <Link
+                                    href={`/products/${createSlug(product.name_en, product.id)}`}
+                                    className="block"
+                                    scroll={false}
+                                >                                    <div className="relative min-h-[500px] md:h-[600px] w-full bg-white rounded-[2.5rem] md:rounded-[4rem] overflow-hidden border border-[#2d5a27]/30 transition-all duration-700 group-hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] group-hover:-translate-y-2 flex flex-col">
 
                                         {/* Image Area */}
                                         <div className="relative flex-grow w-full p-10 md:p-16 transition-transform duration-700 ease-out group-hover:scale-105 transform-gpu">

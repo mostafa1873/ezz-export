@@ -3,13 +3,14 @@ import ProductContent from "../../../../components/products/productdetails";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
-const createSlug = (name: string) => {
+const createSlug = (name: string, id: string | number) => {
   if (!name) return '';
-  return name
+  const baseSlug = name
     .toLowerCase()
     .trim()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
+  return `${baseSlug}-${id}`;
 };
 
 interface PageProps {
@@ -20,8 +21,12 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug, locale } = await params;
 
+  // استخراج الـ ID من آخر الـ slug للبحث بدقة
+  const parts = slug.split('-');
+  const idFromSlug = parts[parts.length - 1];
+
   const product = productsData.products.find(
-    (p) => p.name_en && createSlug(p.name_en) === slug
+    (p) => String(p.id) === idFromSlug
   );
 
   if (!product) return {};
@@ -56,15 +61,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function ProductPage({ params }: PageProps) {
-  // انتظر الـ params بالكامل
   const { slug, locale } = await params;
 
   if (!productsData?.products) {
     return notFound();
   }
 
+  const parts = slug.split('-');
+  const idFromSlug = parts[parts.length - 1];
+
   const product = productsData.products.find(
-    (p) => p.name_en && createSlug(p.name_en) === slug
+    (p) => String(p.id) === idFromSlug
   );
 
   if (!product) {
@@ -80,13 +87,12 @@ export async function generateStaticParams() {
   try {
     if (!productsData?.products) return [];
 
-    // تأكد من إضافة 'it' لو كنت تدعم الإيطالية أيضاً
     const locales = ['ar', 'en', 'it'];
     const paths: { slug: string; locale: string }[] = [];
 
     productsData.products.forEach((p) => {
-      if (p && p.name_en) {
-        const slugValue = createSlug(p.name_en);
+      if (p && p.name_en && p.id) {
+        const slugValue = createSlug(p.name_en, p.id);
         if (slugValue) {
           locales.forEach((lang) => {
             paths.push({

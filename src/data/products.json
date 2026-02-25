@@ -2,7 +2,6 @@
   "products": [
     {
       "id": 1,
-      "group_id": "artichoke",
       "category": "vegetable",
       "status": "fresh",
       "name_ar": "خرشوف",
@@ -15,7 +14,6 @@
     },
     {
       "id": 2,
-      "group_id": "artichoke",
       "category": "vegetable",
       "status": "iqf",
       "name_ar": "خرشوف مجمد",
@@ -55,7 +53,6 @@
     },
     {
       "id": 3,
-      "group_id": "artichoke",
       "category": "vegetable",
       "status": "in_brine",
       "name_ar": "خرشوف محلول ملحي",
@@ -191,7 +188,6 @@
     },
     {
       "id": 28,
-      "group_id": "Beans",
       "category": "vegetable",
       "status": [
         "fresh"
@@ -200,13 +196,12 @@
       "name_en": "Beans",
       "name_it": "Fagioli",
       "image": "../image/newPro-5.jpeg",
-      "description_ar": "مثالية لإضافتها إلى الحساء والصلصات وأطباق المعكرونة والمزيد، مما يجعل من السهل دمج هذه الخضار متعددة الاستخدامات في إبداعاتك الطهوية قلوب الخرشوف الطرية، مثالية للسلطات والبيتزا والأطباق الفاخرة. غنية بالألياف ومضادات الأكسدة.",
-      "description_en": "Tender artichoke hearts, perfect for salads, pizzas, and gourmet dishes. Rich in fiber and antioxidants,perfect for adding to soups, sauces, pasta dishes, and more, making it easy to incorporate this versatile vegetable into your culinary creations.",
-      "description_it": "Cuori di carciofo teneri, perfetti per insalate, pizze e piatti gourmet. Ricchi di fibre e antiossidanti, perfetto da aggiungere a zuppe, salse, piatti di pasta e altro ancora, rendendo facile incorporare questa versatile verdura nelle tue creazioni culinarie."
+      "description_ar": "تُقطف هذه الفاصوليا الطازجة بعناية لضمان قوامها المقرمش ونكهتها الغنية، مع الحفاظ على كامل قيمتها الغذائية من المزرعة إليكم. تتوفر منتجاتنا بالأصناف التالية:",
+      "description_en": "These fresh beans are carefully picked to ensure their crisp texture and rich flavor, preserving all their nutritional value from the farm to you. Our products are available in the following varieties:",
+      "description_it": "Questi fagioli freschi sono raccolti con cura per garantirne la consistenza croccante e il sapore ricco, preservando tutto il loro valore nutrizionale dalla fattoria a voi. I nostri prodotti sono disponibili nelle seguenti varietà:"
     },
     {
       "id": 7,
-      "group_id": "Beans",
       "category": "vegetable",
       "status": "iqf",
       "name_ar": "الفاصوليا",
